@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Queue {
+  int f, rear, capacity;
+  int* queue;
+  Queue(int c)
+  {
+    f = r= 0;
+    capacity = c;
+    queue = new int;
+  }
+
+  ~Queue() { delete[] queue; }
+
+  void Enqueue(int data)
+  {
+    if (capacity == rear) {
+      printf("\nQueue is full\n");
+      return;
+    }
+
+    else {
+      queue[rear] = data;
+      rear++;
+    }
+    return;
+  }
+
+  
+  void Dequeue()
+  {
+    if (f == rear) {
+      printf("\nQueue is empty\n");
+      return;
+    }
+    else {
+      for (int i = 0; i < r- 1; i++) {
+        queue[i] = queue[i + 1];
+      }
+      rear--;
+    }
+    return;
+  }
+
+  void Display()
+  {
+    int i;
+    if (f == rear) {
+      printf("\nQueue is Empty\n");
+      return;
+    }
+
+    for (i = f; i < rear; i++) {
+      printf(" %d <-- ", queue[i]);
+    }
+    return;
+  }
+  void queueFront()
+  {
+    if (f == rear) {
+      printf("\nQueue is Empty\n");
+      return;
+    }
+    printf("\nFront Element is: %d", queue[f]);
+    return;
+  }
+};
+
+int main(void)
+{
+  Queue q(4);
+
+  q.Display();
+  q.Enqueue(6);
+  q.Enqueue(8);
+  q.Enqueue(4);
+  q.Enqueue(0);
+
+  q.Display();
+
+  
+  q.Enqueue(60);
+
+  q.Display();
+
+  q.Dequeue();
+  q.Dequeue();
+
+  printf("\n\nafter two node deletion\n\n");
+
+  q.Display();
+
+  q.queueFront();
+
+  return 0;
+}
